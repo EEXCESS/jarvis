@@ -7,15 +7,43 @@
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-<div ng-controller="PopupCtrl" layout="column" layout-align="space-between start" layout-padding layout-fill
-     style="height: 100px">
+<div ng-controller="PopupCtrl" layout="column" layout-align="space-between start" layout-fill
+     style="width: 300px">
 
-    <h4 class="md-subhead popup-header">Welcome to Jarvis</h4>
+    <h4 class="md-subhead popup-header">Welcome! How may Jarvis serve you?</h4>
 
-
-    <div layout="row" layout-align="space-between end">
-        <md-switch ng-model="application.showApp" aria-label="Toggle Application">Toggle Application</md-switch>
-        <md-button class="md-primary settings-link" ng-click="showSettings()">Settings</md-button>
+    <div layout="row" layout-align="space-between start">
+        <md-switch ng-model="config.showApp" aria-label="Activate Jarvis">Activate Jarvis</md-switch>
+    </div>
+    <div layout="row" layout-align="start start">
+        <div flex  offset="5">
+            <md-radio-group  ng-show="config.showApp" ng-model="config.urlCheck" ng-disabled="!config.showApp">
+                <md-radio-button ng-repeat="it in urlCheckOptions" ng-value="it.value" aria-label="{{it.label}}">
+                    {{it.label}}
+                </md-radio-button>
+           </md-radio-group>
+        </div>
+    </div>
+    <hr>
+    <div layout="row"  offset="5">
+        <span> What should i do with site  <a href="{{currentTabSite}}">{{currentTabSite}}</a> in the future?</span>
+    </div>
+    <div layout="row"  offset="5">
+        <md-button class="md-raised md-warn" ng-disabled="!isBlackList()" aria-label="Block site {{currentTabSite}}"
+                   ng-click="blockCurrentSite()">
+            Block</md-button>
+        <md-button class="md-raised md-primary" ng-disabled="!isWhiteList()" aria-label="Allow site {{currentTabSite}}"
+                   ng-click="allowCurrentSite()">
+           Allow</md-button>
+       <!-- <div flex ng-hide="data.showApp">
+            <md-switch ng-model="activeOnUrl">Block site <a href="{{currentTabSite}}">{{currentTabSite}}</a>
+                {{showUrlChecker()}}</md-switch>
+        </div>
+        -->
+    </div>
+    <hr>
+    <div layout="row" layout-align="space-between end" offset="5">
+         <span>Or got to the <a href="#" ng-click="showSettings()">settings</a>.</span>
     </div>
 </div>
 

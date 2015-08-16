@@ -1,9 +1,10 @@
 (function() {
     'use strict';
 
-    function ParagraphCtrl($scope, $sce, $mdDialog, HighlightService, MessageService, Utils, ParagraphDetectionService) {
+    function ParagraphCtrl($scope, $sce, $mdDialog, HighlightService,
+                           MessageService, Utils, ParagraphDetectionService,
+                           ContentScriptSettings) {
         var _extID = Utils.getExtID();
-
         // the paragraph wrapped by the directive
         var paragraph = ParagraphDetectionService.getParagraph($scope.id);
 
@@ -22,7 +23,24 @@
         $scope.newKeywords = true;
         $scope.resultNumbers = {};
 
+        $scope.$watch(
+          // This is the important part
+          function() {
+            return ContentScriptSettings;
+          },
+
+          function(newValue, oldValue) {
+            console.log('Content Script Settings Changed (new, old)', newValue, oldValue);
+              if ($scope.showPlugin != ContentScriptSettings.showJarvis()) {
+                  $scope.showPlugin = ContentScriptSettings.showJarvis();
+                  $scope.$apply();
+              }
+          },
+          true
+        );
+
         var queryResults = undefined;
+        $scope.showPlugin = ContentScriptSettings.showJarvis();
 
         // Load the initial value from the storage
         chrome.storage.sync.get('Jarvis', function(data) {
@@ -30,7 +48,6 @@
                 $scope.showPlugin = data.Jarvis;
             }
         });
-
 
         // Set listener who listens for changes in the storage
         chrome.storage.onChanged.addListener(function(changes) {

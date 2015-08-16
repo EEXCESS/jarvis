@@ -1,2 +1,7 @@
 - neuen recommender anbinden
 - für alle tabs machen?
+
+(A) Black/Whitelisting when toggeling Jarvis.
+(A) Maintain BL/WL in the settings.
+(A) Debug view for queries: Which provider, which query, which results
+(B) Implement feedback via Google Tables

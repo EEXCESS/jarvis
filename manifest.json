@@ -1,6 +1,6 @@
 {
   "name": "Jarvis",
-  "version": "0.5",
+  "version": "0.6",
   "browser_action": {
     "default_title": "Jarvis",
     "default_icon": {
