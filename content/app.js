@@ -19,7 +19,7 @@ $("body").attr('ng-controller', 'AppCtrl');
 //then do manual bootstrap of angular since we need to load the configuration first.
 angular.element(document).ready(
     function() {
-        chrome.storage.local.get('JarvisContentScriptSettings', function (data) {
+        chrome.storage.sync.get('JarvisContentScriptSettings', function (data) {
             var config = {};
             if (data && 'JarvisContentScriptSettings' in data){
                 config = data['JarvisContentScriptSettings']

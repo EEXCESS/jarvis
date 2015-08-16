@@ -38,15 +38,24 @@
             </div>
 
             <md-switch ng-disabled="true" ng-model="onlyOpen">Only show open, reusable sources</md-switch>
-
+            <md-divider></md-divider>
+            <div style="margin: 15px;">
+               <label>Choose site to display/block Jarvis</label>
+              <md-list-item ng-repeat="(site, whitelisted) in csConfig.bwlist">
+                <md-checkbox ng-model="whitelisted"></md-checkbox>
+                <p>{{site}}</p>
+                <md-icon class="md-secondary" ng-click="removeBWListEntry(site)" aria-label="remove" md-svg-icon="{{icon_remove}}"></md-icon>
+              </md-list-item>
+              <md-divider></md-divider>
+            </div>
         </div>
+
         <div layout="row" layout-align="end end" class="settings">
             <md-button style="width: 70px; font-size: 18px" class="md-primary" ng-click="save()"
                        ng-disabled="!numberForm.$valid">Save
             </md-button>
         </div>
-    </div>
-</div>
+
 
 <script src="../vendor/angular/angular.js" type="text/javascript"></script>
 <script src="../vendor/angular-animate/angular-animate.js" type="text/javascript"></script>

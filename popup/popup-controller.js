@@ -22,7 +22,7 @@
         // Synchronize data with storage and set application state variables
         // TODO: Harmonize local storage with JarvisSettings. 1 Place for all configurations!
         // TODO: Create a config for the content script to access declaration of Constants
-        chrome.storage.local.get('JarvisContentScriptSettings', function (data) {
+        chrome.storage.sync.get('JarvisContentScriptSettings', function (data) {
             if (data && 'JarvisContentScriptSettings' in data){
                 $scope.config = data['JarvisContentScriptSettings']
             }else{
@@ -87,7 +87,7 @@
         };
 
         var _store  = function (config){
-            chrome.storage.local.set({'JarvisContentScriptSettings': config});
+            chrome.storage.sync.set({'JarvisContentScriptSettings': config});
         }
     }
 

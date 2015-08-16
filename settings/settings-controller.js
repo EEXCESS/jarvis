@@ -1,7 +1,27 @@
 (function () {
     'use strict';
 
-    function SettingsCtrl($scope, $timeout) {
+    function SettingsCtrl($scope, $timeout, $sce) {
+        //black white list
+        var _extID = chrome.i18n.getMessage('@@extension_id');
+        $scope.icon_remove = $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/media/icons/remove-icon18.svg');
+         chrome.storage.sync.get('JarvisContentScriptSettings', function (data) {
+            if (data && 'JarvisContentScriptSettings' in data){
+                $scope.csConfig = data['JarvisContentScriptSettings']
+            }else{
+                $scope.csConfig = {
+                    "showApp" : true,
+                    "urlCheck" : 'blacklist',
+                    "bwlist" : {},
+                };
+            }
+            $scope.$apply();
+        });
+        $scope.removeBWListEntry = function(url){
+                delete $scope.csConfig.bwlist[url];
+        };
+
+
         $scope.settings = {};
         $scope.languages = [
             {
@@ -34,25 +54,27 @@
             }
             $scope.$apply();
         });
-
-
+        
         $scope.save = function () {
             chrome.storage.sync.set({
                 'JarvisSettings': {
                     onlyOpen: $scope.onlyOpen,
                     resultNumber: $scope.resultNumber,
                     language: $scope.language
-                }
+                },
+                'JarvisContentScriptSettings': $scope.csConfig
             }, function () {
-                $scope.feedback = 'saved';
+                    $scope.feedback = 'saved';
 
-                $timeout(function () {
-                    $scope.feedback = '';
-                }, 3000);
+                    $timeout(function () {
+                        $scope.feedback = '';
+                      }, 3000);
             });
         };
 
         $scope.feedback = undefined;
+
+
     }
 
     angular
