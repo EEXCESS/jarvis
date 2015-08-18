@@ -1,0 +1,65 @@
+<md-dialog aria-label="List detail dialog" flex="80">
+    <md-dialog-content>
+        <div class="jarvis-chips">
+            <md-chips ng-show="keywords.words.length !== 0" ng-model="keywords.words"
+                      placeholder="Add a keyword"
+                      delete-button-label="Remove Keyword"
+                      delete-hint="Press delete to remove keyword"
+                      secondary-placeholder="Add a keyword">
+            </md-chips>
+        </div>
+        <md-tabs >
+            <md-tab md-selected="selectedTab" ng-repeat="(key, value) in results"
+                    label="{{key}}({{value.results.length}})">
+                <md-content>
+                   <!--  <div layout="column" layout-align="space-between start" layout-fill>-->
+                        <div layout ="row" layout-fill> <b>Generating Query:</b> {{value.query}}</div>
+
+                         <!-- <ul>
+                             <li ng-repeat="result in value.results">
+                                date: {{ result.date }}, title: {{ result.title }}, badge: {{result.documentBadge.provider}}, language: {{result.language}}
+                             </li>
+                         </ul>-->
+                            <md-grid-list md-cols="12" md-row-height="1:1" md-gutter="5px" flex>
+                                <md-grid-tile ng-if="result.previewImage" ng-repeat="result in value.results" md-rowspan="3" md-colspan="2">
+                                    <md-tooltip class="tooltip" ng-if="result.description && result.description!=''">
+                                                {{result.description}}</md-tooltip>
+                                                <a href="{{result.documentBadge.uri}}" target="_blank">
+                                                <img ng-src="{{result.previewImage || imageFallback}}" flex>
+
+
+                                                <md-grid-tile-footer>
+                                                    <div><span ng-if="result.date!='unknown'">{{result.date}},</span>
+                                                         {{result.title}}<br>
+
+                                                    </div>
+                                                </md-grid-tile-footer>
+                                            </a>
+                                    </md-grid-tile>
+                                  <!--  <md-grid-tile ng-if="!result.previewImage" >
+                                            <md-grid-tile-header>
+                                                 <a href="{{result.documentBadge.uri}}" target="_blank">
+                                                    {{result.title}}
+                                                 </a>
+                                            </md-grid-tile-header>
+                                            <span ng-if="result.date!='unknown'">{{result.date}},</span>
+                                            <md-content>
+                                                <span ng-if="result.description && result.description!=''">
+                                                {{result.description}}
+                                                </span>
+                                            </md-content>
+                                    </md-grid-tile> -->
+
+                            </md-grid-list>
+
+
+                 </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button class="md-primary" ng-click="hide()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

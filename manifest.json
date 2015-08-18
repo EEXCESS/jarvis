@@ -23,8 +23,10 @@
         "vendor/angular-animate/angular-animate.min.js",
         "vendor/angular-aria/angular-aria.min.js",
         "vendor/highlight.js",
+        "vendor/underscore/underscore.js",
         "content/app.js",
         "content/app-controller.js",
+        "content/filters.js",
         "content/paragraph-detection/paragraph-detection-service.js",
         "content/message-service.js",
         "content/utils-service.js",
@@ -33,7 +35,8 @@
         "content/paragraph-directive/anchor-directive.js",
         "content/paragraph-directive/paragraph-directive.js",
         "content/paragraph-directive/paragraph-directive-controller.js",
-        "content/result-dialog/result-dialog-controller.js"
+        "content/result-dialog/result-dialog-controller.js",
+        "content/vis-list-dialog/vis-list-dialog-controller.js"
       ],
       "css": [
         "vendor/angular-material/angular-material.min.css",

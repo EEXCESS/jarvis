@@ -52,6 +52,15 @@
                       layout-align="center center">{{resultNumbers.unassignedResults}}</span>
             </md-button>
 
+            <!-- Result list per provider-->
+            <md-button id="vis-list" ng-if="queried" aria-label="Result list per provider"
+                       class="animated bounceIn md-primary md-icon-button md-raised result-button"
+                       ng-click="showVisList($event)" style="margin-right: 10px">
+                <md-icon md-svg-src="{{icons.path}}/vis-list-icon.svg"></md-icon>
+                <md-tooltip class="tooltip">Show results per provider</md-tooltip>
+                <span class="result-counter" layout="row"
+                      layout-align="center center">{{resultNumbers.total()}}</span>
+            </md-button>
         </div>
     </div>
     <div ng-class="{'hovered': hover}" class="jarvis-chips">

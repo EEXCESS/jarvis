@@ -16,6 +16,7 @@
         $scope.icons.text = $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/media/icons/text-icon.svg');
         $scope.icons.video = $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/media/icons/video-icon.svg');
         $scope.icons.unassinged = $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/media/icons/unknown-icon.svg');
+        $scope.icons.path = $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/media/icons/');
 
         // Must be a deep object to prevent problems with the watcher
         $scope.keywords = {};
@@ -30,7 +31,6 @@
           },
 
           function(newValue, oldValue) {
-            console.log('Content Script Settings Changed (new, old)', newValue, oldValue);
               if ($scope.showPlugin != ContentScriptSettings.showJarvis()) {
                   $scope.showPlugin = ContentScriptSettings.showJarvis();
                   $scope.$apply();
@@ -140,6 +140,26 @@
             });
         };
 
+        // Show a dialog with the details on the found results
+        $scope.showVisList = function(event) {
+            $mdDialog.show({
+                templateUrl: $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/content/vis-list-dialog/vis-list-dialog.html'),
+                controller: 'VisListDialogCtrl',
+                resolve: {
+                    results: function() {
+                        return queryResults;
+                    },
+                    resultNumbers: function() {
+                        return $scope.resultNumbers;
+                    },
+                    keywords: function() {
+                        return $scope.keywords;
+                    }
+                },
+                targetEvent: event
+            });
+        };
+
         // checks if the given keyword is already in the list. if yes it removes it. if now it adds it
         $scope.toggleKeyword = function(keyword) {
             var capitalizedKeyword = keyword.charAt(0).toUpperCase() + keyword.slice(1);
@@ -166,6 +186,10 @@
                         $scope.resultNumbers.imageResults = 0;
                         $scope.resultNumbers.avResults = 0;
                         $scope.resultNumbers.unassignedResults = 0;
+                        $scope.resultNumbers.total = function(){
+                            return $scope.resultNumbers.textResults +   $scope.resultNumbers.imageResults+
+                                   $scope.resultNumbers.unassignedResults +   $scope.resultNumbers.avResults;
+                        }
 
                         // we uppercase everything because some types are returned lowercase and some uppercase
                         angular.forEach(queryResults, function(item) {

@@ -21,17 +21,6 @@
 
     angular
         .module('Jarvis')
-        .controller('ResultDialogCtrl', ResultDialogCtrl)
-        .filter('resultFilter', function () {
-            return function (results, types) {
-                //debugger;
-                var out = [];
-                angular.forEach(results, function (value) {
-                    if (types[value.mediaType] === true) {
-                        out.push(value);
-                    }
-                });
-                return out;
-            };
-        });
+        .controller('ResultDialogCtrl', ResultDialogCtrl);
+
 })();
