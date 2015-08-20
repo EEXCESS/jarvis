@@ -42,7 +42,7 @@
         .filter("hasPreviewImage", function(){
             return function(collection){
                 var returns = [];
-                _.map(collection, function (o) {
+                _.each(collection, function (o) {
                         if (o.previewImage)
                             returns.push(o);
                     });
@@ -50,4 +50,21 @@
             }
 
         })
+        .filter("matchKeywordsFilter", function () {
+                return function (keywords, item){
+                    var returns = [];
+                    _.each(keywords, function (kw) {
+                        if (_.max(_.map(item, function (value, key){
+                                        if (value && value.toLowerCase && key != "documentBadge" && key != "generatingQuery"){
+                                            return value.toLowerCase().indexOf(kw.toLowerCase());
+                                        }
+                                        return -1;
+                                    })
+                                 )>-1)
+                            returns.push(kw);
+                    });
+                return returns;
+                }
+            }
+        )
 })();
