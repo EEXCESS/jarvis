@@ -13,6 +13,7 @@
                     "showApp" : true,
                     "urlCheck" : 'blacklist',
                     "bwlist" : {},
+                    "enableExperimentalFeatures" : false,
                 };
             }
             $scope.$apply();
@@ -20,7 +21,6 @@
         $scope.removeBWListEntry = function(url){
                 delete $scope.csConfig.bwlist[url];
         };
-
 
         $scope.settings = {};
         $scope.languages = [
@@ -73,7 +73,6 @@
         };
 
         $scope.feedback = undefined;
-
 
     }
 

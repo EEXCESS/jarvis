@@ -27,7 +27,8 @@ angular.element(document).ready(
                 config = {
                     "showApp" : true,
                     "urlCheck" : 'blacklist',
-                    "bwlist" : {}
+                    "bwlist" : {},
+                    "enableExperimentalFeatures" : false,
                 };
             }
 
@@ -44,6 +45,12 @@ angular.element(document).ready(
                             console.log("checkulr changed to "+config.urlCheck);
                             //angular.module(['Jarvis']).name('ContentScriptSettings', {});
                         }
+                        if (change.newValue.enableExperimentalFeatures != change.oldValue.enableExperimentalFeatures){
+                            config.enableExperimentalFeatures = change.newValue.enableExperimentalFeatures;
+                            console.log("enableExperimentalFeatures changed to " + config.enableExperimentalFeatures);
+                            //angular.module(['Jarvis']).name('ContentScriptSettings', {});
+                        }
+
                         //note: in case of bwlist change we reload the page, so no need to care about.
                     }
                 }

@@ -42,6 +42,10 @@
         -->
     </div>
     <md-divider/>
+    <div layout="row" layout-align="space-between start">
+        <md-switch ng-model="config.enableExperimentalFeatures" aria-label="Enable experimental features">Enable experimental Features (at your own risk)</md-switch>
+    </div>
+    <md-divider/>
     <div layout="row" layout-align="space-between end" offset="5">
          <span>Or got to the <a href="#" ng-click="showSettings()">settings</a>.</span>
     </div>

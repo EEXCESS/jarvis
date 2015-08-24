@@ -30,13 +30,14 @@
                     "showApp" : true,
                     "urlCheck" : 'blacklist',
                     "bwlist" : {},
+                    "enableExperimentalFeatures": false,
                 };
             }
             $scope.$apply();
         });
         //$scope.config = ContentScriptSettings;
         // Save the value of showApp to the storage
-        $scope.$watchGroup(['config.showApp','config.urlCheck'], function () {
+        $scope.$watchGroup(['config.showApp','config.urlCheck','config.enableExperimentalFeatures'], function () {
             _store($scope.config);
         });
         //get current tab and its url

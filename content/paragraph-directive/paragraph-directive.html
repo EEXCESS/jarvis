@@ -53,7 +53,7 @@
             </md-button>
 
             <!-- Result list per provider-->
-            <md-button id="vis-list" ng-if="queried" aria-label="Result list per provider"
+            <md-button id="vis-list" ng-if="queried && enableExperimentalFeatures" aria-label="Result list per provider"
                        class="animated bounceIn md-primary md-icon-button md-raised result-button"
                        ng-click="showVisList($event)" style="margin-right: 10px">
                 <md-icon md-svg-src="{{icons.path}}/vis-list-icon.svg"></md-icon>
@@ -61,6 +61,17 @@
                 <span class="result-counter" layout="row"
                       layout-align="center center">{{resultNumbers.total()}}</span>
             </md-button>
+
+            <!-- Result list per provider-->
+            <md-button id="vis-timeline" ng-if="queried && enableExperimentalFeatures" aria-label="Show timeline of results"
+                       class="animated bounceIn md-primary md-icon-button md-raised result-button"
+                       ng-click="showTimeline($event)" style="margin-right: 10px">
+                <md-icon md-svg-src="{{icons.path}}/vis-timeline-icon.svg"></md-icon>
+                <md-tooltip class="tooltip">Show timeline of results</md-tooltip>
+                <span class="result-counter" layout="row"
+                      layout-align="center center">{{resultNumbers.timelineResults}}</span>
+            </md-button>
+
         </div>
     </div>
     <div ng-class="{'hovered': hover}" class="jarvis-chips">

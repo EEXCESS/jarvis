@@ -35,12 +35,18 @@
                   $scope.showPlugin = ContentScriptSettings.showJarvis();
                   $scope.$apply();
               }
+              if ($scope.enableExperimentalFeatures != ContentScriptSettings.enableExperimentalFeatures){
+                  $scope.enableExperimentalFeatures = ContentScriptSettings.enableExperimentalFeatures;
+                  $scope.$apply();
+              }
+
           },
           true
         );
 
         var queryResults = undefined;
         $scope.showPlugin = ContentScriptSettings.showJarvis();
+        $scope.enableExperimentalFeatures = ContentScriptSettings.enableExperimentalFeatures;
 
         // Load the initial value from the storage
         chrome.storage.sync.get('Jarvis', function(data) {
@@ -61,6 +67,7 @@
                     $scope.resultNumbers.textResults = 0;
                     $scope.resultNumbers.imageResults = 0;
                     $scope.resultNumbers.avResults = 0;
+                    $scope.resultNumbers.timelineResults = 0;
                     queryResults = undefined;
                 }
                 $scope.$apply();
@@ -159,6 +166,25 @@
                 targetEvent: event
             });
         };
+         // Show a timeline using timeline.js
+        $scope.showTimeline = function(event) {
+            $mdDialog.show({
+                templateUrl: $sce.trustAsResourceUrl('chrome-extension://' + _extID + '/content/vis-timeline-dialog/vis-timeline-dialog.html'),
+                controller: 'VisTimelineDialogCtrl',
+                resolve: {
+                    results: function() {
+                        return queryResults;
+                    },
+                    resultNumbers: function() {
+                        return $scope.resultNumbers;
+                    },
+                    keywords: function() {
+                        return $scope.keywords;
+                    }
+                },
+                targetEvent: event
+            });
+        };
 
         // checks if the given keyword is already in the list. if yes it removes it. if now it adds it
         $scope.toggleKeyword = function(keyword) {
@@ -186,6 +212,7 @@
                         $scope.resultNumbers.imageResults = 0;
                         $scope.resultNumbers.avResults = 0;
                         $scope.resultNumbers.unassignedResults = 0;
+                        $scope.resultNumbers.timelineResults = 0;
                         $scope.resultNumbers.total = function(){
                             return $scope.resultNumbers.textResults +   $scope.resultNumbers.imageResults+
                                    $scope.resultNumbers.unassignedResults +   $scope.resultNumbers.avResults;
@@ -206,6 +233,8 @@
                                 $scope.resultNumbers.avResults++;
                                 item.mediaType = item.mediaType.toUpperCase();
                             }
+                            if (item.date != "unknown")
+                                $scope.resultNumbers.timelineResults++;
                         });
 
                         $scope.queried = true;
