@@ -11,7 +11,7 @@ when browsing the web.
 
 ### Chrome Webstore
 
-Jarvis can be found under this link:
+Jarvis can be found in the [Chrome Webstore](https://chrome.google.com/webstore/detail/jarvis/cchdpoahgbbpoadpfppfjnnppannjkmn)
 
 
 ### Manual Installation:
