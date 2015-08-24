@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Jarvis">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+    <title>Demo for showing the timeline.</title>
+    <script src="../../../vendor/angular/angular.js"></script>
+    <script src="../../../vendor/jquery/dist/jquery.js"></script>
+    <script src="../../../vendor/TimelineJS3/compiled/js/timeline.js"></script>
 
+    <script>
+
+
+        angular
+                .module('Jarvis', [])
+                .controller("DummyCtrl", function ($scope) {
+                    $scope.id = "1";
+                    $scope.timelineData = {
+                        "title": {
+                            "media": {
+                                "caption": "",
+                                "credit": "",
+                                "url": "url_to_your_media.jpg",
+                                "thumbnail": "url_to_your_media.jpg"
+                            },
+                            "text": {
+                                "headline": "Headline Goes Here",
+                                "text": "Your slide text goes here."
+                            }
+                        },
+                        "events": [
+                            {
+                                "start_date": {
+                                    "year": "1900",
+                                    "month": "01",
+                                    "day": "05",
+                                    "hour": "",
+                                    "minute": "",
+                                    "second": "",
+                                    "millisecond": "",
+                                    "format": ""
+                                },
+                                "end_date": {
+                                    "year": "1900",
+                                    "month": "06",
+                                    "day": "07",
+                                    "hour": "",
+                                    "minute": "",
+                                    "second": "",
+                                    "millisecond": "",
+                                    "format": ""
+                                },
+                                "media": {
+                                    "caption": "",
+                                    "credit": "",
+                                    "url": "url_to_your_media.jpg",
+                                    "thumbnail": "url_to_your_media.jpg"
+                                },
+                                "text": {
+                                    "headline": "Headline Goes Here",
+                                    "text": "Your slide text goes here."
+                                }
+                            }
+                        ]
+                    };
+                }
+        );
+    </script>
+    <script src="../../../content/vis-timeline-dialog/timeline-directive.js"></script>
+    <!--<script src="../../../content/vis-timeline-dialog/vis-timeline-dialog-controller.js"></script>-->
+
+
+    <link rel="stylesheet" type="text/css" href="../../../vendor/TimelineJS3/compiled/css/timeline.css"/>
+
+
+</head>
+<body ng-controller="DummyCtrl">
+Showing the timeline with data: <br>
+{{timelineData}}
+<br>
+<jarvistimeline id="jarvist-timeline-1" data="timelineData" height="700" lang="lang"></jarvistimeline>
 </body>
 </html>

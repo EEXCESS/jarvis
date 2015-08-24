@@ -24,6 +24,8 @@
         "vendor/angular-aria/angular-aria.min.js",
         "vendor/highlight.js",
         "vendor/underscore/underscore.js",
+        "vendor/moment/min/moment.min.js",
+        "vendor/TimelineJS3/compiled/js/timeline.js",
         "content/app.js",
         "content/app-controller.js",
         "content/filters.js",
@@ -36,10 +38,13 @@
         "content/paragraph-directive/paragraph-directive.js",
         "content/paragraph-directive/paragraph-directive-controller.js",
         "content/result-dialog/result-dialog-controller.js",
-        "content/vis-list-dialog/vis-list-dialog-controller.js"
+        "content/vis-list-dialog/vis-list-dialog-controller.js",
+        "content/vis-timeline-dialog/vis-timeline-dialog-controller.js",
+        "content/vis-timeline-dialog/timeline-directive.js"
       ],
       "css": [
         "vendor/angular-material/angular-material.min.css",
+        "vendor/TimelineJS3/compiled/css/timeline.css",
         "common/angular-csp.css",
         "content/styles.css",
         "content/animate.css"
