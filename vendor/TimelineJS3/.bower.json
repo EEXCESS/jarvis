@@ -1,0 +1,15 @@
+{
+  "name": "TimelineJS3",
+  "homepage": "https://github.com/NUKnightLab/TimelineJS3",
+  "version": "3.2.2",
+  "_release": "3.2.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.2.2",
+    "commit": "339c92132962647b4f9a87dffe825c4d12ccd9d5"
+  },
+  "_source": "https://github.com/NUKnightLab/TimelineJS3.git",
+  "_target": "3.2.2",
+  "_originalSource": "https://github.com/NUKnightLab/TimelineJS3.git",
+  "_direct": true
+}

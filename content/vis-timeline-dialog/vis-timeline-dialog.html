@@ -1,0 +1,133 @@
+<md-dialog aria-label="List detail dialog" flex="80">
+    <md-dialog-content>
+        <md-tabs style="min-width: 1000px; min-height: 600px;">
+            <md-tab md-selected="selectedTab" ng-repeat="(key, value) in results"
+                    label="{{key}}({{value.results.length}})">
+                <md-content>
+                    <!--  <div layout="column" layout-align="space-between start" layout-fill>-->
+                    <div layout="row" layout-fill><small><div><b>Generating Query:</b></div> <div> {{value.query}} </div></small></div>
+                    <div layout="row" layout-fill>
+                        <md-list>
+                            <md-list-item ng-repeat="result in value.results"
+                                          ng-mouseleave="showDetailDialog = false" flex>
+                                <div class="result-image-container" layout="row" layout-align="start center"
+                                     ng-mouseenter="showDetailDialog = true"
+                                     ng-class="{'result-image-container-small': !showDetailDialog, 'result-image-container-big': showDetailDialog}">
+                                    <a href="{{result.documentBadge.uri}}" target="_blank">
+                                        <img ng-src="{{result.previewImage || textFallback}}" class="preview-icon"
+                                             ng-class="{'preview-icon-small': !showDetailDialog, 'preview-icon-big': showDetailDialog}">
+                                    </a>
+                                </div>
+
+                                <div layout="column" layout-align="start start" layout-fill layout-padding>
+
+                                    <div class="result-dialog-text" layout="column" layout-align="center start">
+                                        <div class="result-dialog-header" layout="column" layout-align="center start">
+                                            <a href="{{result.documentBadge.uri}}" target="_blank">
+                                                {{result.title}} <span ng-if="result.date!='unknown'">, ({{result.date}})</span>
+                                            </a>
+                                            <md-tooltip>
+                                                <small>Contained Keywords: </small>
+                                                <small ng-repeat="word in keywords.words | matchKeywordsFilter :result">
+                                                    {{word}}</small>
+                                            </md-tooltip>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="showDetailDialog" layout-fill>
+                                        <md-list class="detailed-list">
+                                            <md-list-item class="detailed-item" layout="row"
+                                                          layout-align="start center">
+                                                <div flex="25" layout-align="start start">
+                                                    <span class="name">Description:</span>
+                                                </div>
+                                                <div flex class="result-dialog-description">{{result.description}}</div>
+                                            </md-list-item>
+                                            <md-list-item class="detailed-item" layout="row"
+                                                          layout-align="start center">
+                                                <div flex="25" layout-align="start start">
+                                                    <span class="name">Data Provider:</span>
+                                                </div>
+                                                <div flex>{{result.documentBadge.provider}}</div>
+                                            </md-list-item>
+                                            <md-list-item class="detailed-item" layout="row"
+                                                          layout-align="start center">
+                                                <div flex="25" layout-align="start start">
+                                                    <span class="name">Language:</span>
+                                                </div>
+                                                <div flex>{{result.language}}</div>
+                                            </md-list-item>
+                                            <md-list-item class="detailed-item" layout="row"
+                                                          layout-align="start center">
+                                                <div flex="25" layout-align="start start">
+                                                    <span class="name">Date:</span>
+                                                </div>
+                                                <div flex>{{result.date}}</div>
+                                            </md-list-item>
+                                            <md-list-item class="detailed-item" layout="row"
+                                                          layout-align="start center">
+                                                <div flex="25" layout-align="start start">
+                                                    <span class="name">Rights:</span>
+                                                </div>
+                                                <div flex><a ng-if="isUri(result.licence)" href="{{result.licence}}"
+                                                             target="_blank">{{result.licence}}</a>
+                                                    <span ng-if="!isUri(result.licence)">{{result.licence}}</span>
+                                                </div>
+                                            </md-list-item>
+                                        </md-list>
+                                    </div>
+                                </div>
+                                <md-divider ng-show="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+
+
+                    <!-- <ul>
+                        <li ng-repeat="result in value.results">
+                           date: {{ result.date }}, title: {{ result.title }}, badge: {{result.documentBadge.provider}}, language: {{result.language}}
+                        </li>
+                    </ul>
+                       <md-grid-list md-cols="12" md-row-height="1:1" md-gutter="5px" flex>
+                           <md-grid-tile ng-if="result.previewImage" ng-repeat="result in value.results" md-rowspan="3" md-colspan="2">
+                               <md-tooltip class="tooltip" ng-if="result.description && result.description!=''">
+                                           {{result.description}}</md-tooltip>
+                                           <a href="{{result.documentBadge.uri}}" target="_blank">
+                                           <img ng-src="{{result.previewImage || imageFallback}}" flex>
+
+
+                                           <md-grid-tile-footer>
+                                               <div><span ng-if="result.date!='unknown'">{{result.date}},</span>
+                                                    {{result.title}}<br>
+
+                                               </div>
+                                           </md-grid-tile-footer>
+                                       </a>
+                               </md-grid-tile>
+                               <md-grid-tile ng-if="!result.previewImage" >
+                                       <md-grid-tile-header>
+                                            <a href="{{result.documentBadge.uri}}" target="_blank">
+                                               {{result.title}}
+                                            </a>
+                                       </md-grid-tile-header>
+                                       <span ng-if="result.date!='unknown'">{{result.date}},</span>
+                                       <md-content>
+                                           <span ng-if="result.description && result.description!=''">
+                                           {{result.description}}
+                                           </span>
+                                       </md-content>
+                               </md-grid-tile> -->
+
+                    </md-grid-list>
+
+
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button class="md-primary" ng-click="hide()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>
