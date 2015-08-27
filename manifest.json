@@ -1,8 +1,8 @@
 {
   "name": "Jarvis",
-  "version": "0.61",
+  "version": "0.62",
   "browser_action": {
-    "default_title": "Jarvis",
+    "default_title": "Jarvis-Dev",
     "default_icon": {
       "19": "media/icons/icon38.png",
       "38": "media/icons/icon38.png"
