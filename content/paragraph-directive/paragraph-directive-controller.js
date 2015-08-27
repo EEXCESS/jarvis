@@ -33,6 +33,16 @@
           function(newValue, oldValue) {
               if ($scope.showPlugin != ContentScriptSettings.showJarvis()) {
                   $scope.showPlugin = ContentScriptSettings.showJarvis();
+                   // reset the application
+                if (!$scope.showPlugin) {
+                    HighlightService.removeHighlight($scope.id);
+                    $scope.keywords.words = [];
+                    $scope.resultNumbers.textResults = 0;
+                    $scope.resultNumbers.imageResults = 0;
+                    $scope.resultNumbers.avResults = 0;
+                    $scope.resultNumbers.timelineResults = 0;
+                    queryResults = undefined;
+                }
                   $scope.$apply();
               }
               if ($scope.enableExperimentalFeatures != ContentScriptSettings.enableExperimentalFeatures){
@@ -47,32 +57,6 @@
         var queryResults = undefined;
         $scope.showPlugin = ContentScriptSettings.showJarvis();
         $scope.enableExperimentalFeatures = ContentScriptSettings.enableExperimentalFeatures;
-
-        // Load the initial value from the storage
-        chrome.storage.sync.get('Jarvis', function(data) {
-            if (data.Jarvis !== undefined) {
-                $scope.showPlugin = data.Jarvis;
-            }
-        });
-
-        // Set listener who listens for changes in the storage
-        chrome.storage.onChanged.addListener(function(changes) {
-            if (changes.Jarvis && changes.Jarvis.newValue !== undefined) {
-                $scope.showPlugin = changes.Jarvis.newValue;
-
-                // reset the application
-                if (!$scope.showPlugin) {
-                    HighlightService.removeHighlight($scope.id);
-                    $scope.keywords.words = [];
-                    $scope.resultNumbers.textResults = 0;
-                    $scope.resultNumbers.imageResults = 0;
-                    $scope.resultNumbers.avResults = 0;
-                    $scope.resultNumbers.timelineResults = 0;
-                    queryResults = undefined;
-                }
-                $scope.$apply();
-            }
-        });
 
         // Searches for keywords and sends a query to europeana afterwards
         $scope.query = function() {
