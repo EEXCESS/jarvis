@@ -1,5 +1,5 @@
 {
-  "name": "Jarvis-Dev",
+  "name": "Jarvis",
   "version": "0.62",
   "browser_action": {
     "default_title": "Jarvis-Dev",
